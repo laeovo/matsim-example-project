@@ -15,5 +15,7 @@ public class Run2022_11_14 {
         Controler controler = new Controler(scenario);
 
         controler.run();
+
+        
     }
 }
