@@ -39,45 +39,9 @@ import java.net.URL;
  *
  */
 public class RunMatsimTest {
-	
-	@Rule public MatsimTestUtils utils = new MatsimTestUtils() ;
 
 	@Test
-	// @Ignore("OTFVis does not work on build server") PLEASE DO NOT DO THIS.  Rather comment out OTFVis line in RunMatsim#main.  kai, oct'22
-	public final void test() {
-
-		try {
-			final URL baseUrl = ExamplesUtils.getTestScenarioURL( "equil" );
-			final String fullUrl = IOUtils.extendUrl( baseUrl, "config.xml" ).toString();
-			String [] args = {fullUrl,
-				  "--config:controler.outputDirectory", utils.getOutputDirectory(),
-				  "--config:controler.lastIteration", "1"
-			} ;
-			RunMatsim.main( args ) ;
-			{
-				Population expected = PopulationUtils.createPopulation( ConfigUtils.createConfig() ) ;
-				PopulationUtils.readPopulation( expected, utils.getInputDirectory() + "/output_plans.xml.gz" );
-
-				Population actual = PopulationUtils.createPopulation( ConfigUtils.createConfig() ) ;
-				PopulationUtils.readPopulation( actual, utils.getOutputDirectory() + "/output_plans.xml.gz" );
-
-				boolean result = PopulationUtils.comparePopulations( expected, actual );
-				Assert.assertTrue( result );
-			}
-			{
-				String expected = utils.getInputDirectory() + "/output_events.xml.gz" ;
-				String actual = utils.getOutputDirectory() + "/output_events.xml.gz" ;
-				EventsFileComparator.Result result = EventsUtils.compareEventsFiles( expected, actual );
-				Assert.assertEquals( EventsFileComparator.Result.FILES_ARE_EQUAL, result );
-			}
-
-		} catch ( Exception ee ) {
-			Logger.getLogger(this.getClass()).fatal("there was an exception: \n" + ee ) ;
-
-			// if one catches an exception, then one needs to explicitly fail the test:
-			Assert.fail();
-		}
-
-
+	public void testSomething() {
+		Assert.assertEquals(1, 2);
 	}
 }
