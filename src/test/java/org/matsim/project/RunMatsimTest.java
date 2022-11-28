@@ -40,8 +40,12 @@ import java.net.URL;
  */
 public class RunMatsimTest {
 
+	@Rule
+	public MatsimTestUtils utils = new MatsimTestUtils();
+
 	@Test
 	public void testSomething() {
-		Assert.assertEquals(1, 2);
+		System.out.println(utils.getOutputDirectory());
+		System.out.println(utils.getInputDirectory());
 	}
 }
